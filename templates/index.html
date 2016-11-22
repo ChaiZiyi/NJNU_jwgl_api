@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>南师大教务系统API</title>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap-3.3.7-dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="page-header">
+                    <h1>
+					南师大教务系统API<small>使用说明</small>
+				</h1>
+                </div>
+                <a href="https://github.com/ChaiZiyi/NJNU_jwgl_api"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+                <div class="tabbable" id="tabs-908722">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#panel-221326" data-toggle="tab">登录</a>
+                        </li>
+                        <li>
+                            <a href="#panel-275938" data-toggle="tab">基本信息</a>
+                        </li>
+                        <li>
+                            <a href="#panel-275937" data-toggle="tab">学业成绩</a>
+                        </li>
+                        <li>
+                            <a href="#panel-275936" data-toggle="tab">我的课表</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="panel-221326">
+                            <h1>/login</h1>
+                            <h3>描述</h3>
+                            <p>
+                                登录教务系统并写入cookie值方便其他api调用
+                            </p>
+                            <h3>参数</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width='20%'>
+                                            是否必须
+                                        </th>
+                                        <th width='20%'>
+                                            参数名
+                                        </th>
+                                        <th>
+                                            参数说明
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            必须
+                                        </td>
+                                        <td>
+                                            username
+                                        </td>
+                                        <td>
+                                            登录教务系统的用户名
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            必须
+                                        </td>
+                                        <td>
+                                            password
+                                        </td>
+                                        <td>
+                                            登录教务系统的密码
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3>返回值说明</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width='20%'>
+                                            字段
+                                        </th>
+                                        <th width='20%'>
+                                            类型
+                                        </th>
+                                        <th>
+                                            说明
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            status
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            状态
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            message
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            状态说明
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            cookies
+                                        </td>
+                                        <td>
+                                            dict
+                                        </td>
+                                        <td>
+                                            cookie值
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3>调用示例</h3>
+                            <code>http://api.chaiziyi.com.cn/jwgl/login?username=123&password=123</code>
+                            <h3>JSON示例</h3>
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+						登录成功
+					</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <pre>{
+  "message": "操作成功!",
+  "status": "200",
+  "cookies": {
+    "JSESSIONID": "9574F3932E840F44738C1A568F67xxxx.kingo154"
+  }
+}</pre>
+                                </div>
+                            </div>
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+						登录失败
+					</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <pre>{
+  "status": "402",
+  "message": "帐号或密码有误!"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="panel-275938">
+                            <h1>/info</h1>
+                            <h3>描述</h3>
+                            <p>
+                                查询教务系统上的个人信息
+                            </p>
+                            <h3>参数</h3>
+                            <p>无</p>
+                            <h3>返回值说明</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width='20%'>
+                                            字段
+                                        </th>
+                                        <th width='20%'>
+                                            类型
+                                        </th>
+                                        <th>
+                                            说明
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            status
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            状态
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            message
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            状态说明
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            info
+                                        </td>
+                                        <td>
+                                            dict
+                                        </td>
+                                        <td>
+                                            详细信息
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3>调用示例</h3>
+                            <code>http://api.chaiziyi.com.cn/jwgl/info</code>
+                            <h3>JSON示例</h3>
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+						查询成功
+					</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <pre>{
+  "info": {
+    "zp": null,//照片
+    "bdtime": null,//入学时间
+    "zsjj": "xxx",//招生季节
+    "pydx": null,//培养对象
+    "ss_mc": null,//宿舍号
+    "syd": null,//生源地区
+    "mz": "xxx",//民族
+    "ssdh": null,//宿舍电话
+    "lqzy": null,//录取专业
+    "dzyx": null,//电子邮箱
+    "jkzk": null,//健康状况
+    "gat": null,//港澳台代码
+    "zzmm": null,//政治面貌
+    "dh": null,//联系电话
+    "sydw": null,//毕业中学
+    "jg": null,//籍贯
+    "kslb": null,//考生类别
+    "bjmc": "xxx",//行政班级
+    "yhxh": "xxx",//学号
+    "whcj": null,//入学成绩
+    "rxfs": null,//入学方式
+    "yzbm": null,//邮政编码
+    "whcd": null,//入学文化程度
+    "zymc": "xxx",//专业名称
+    "xz": "xxx",//学制
+    "sfzjh": "xxx",//身份证号
+    "pycc": null,//培养层次
+    "gkzkzh": "xxx",//高考准考证号
+    "xm": "xxx",//姓名
+    "kstc": null,//特长
+    "gkksh": "xxx",//高考考生号
+    "xh": "xxx",//学号(这里指学籍号)
+    "zpid": null,//照片id
+    "yxb": "xxx",//院(系)/部
+    "xb": "xxx",//性别
+    "txdz": null,//联系地址
+    "xmpy": null,//姓名拼音(英文名)
+    "rxnj": "xxx",//入学年份
+    "cym": null,//曾用名
+    "csrq": "xxx",//出生日期
+    "csd": null//出生地
+  },
+  "message": "基本信息",
+  "status": "200"
+}</pre>
+                                </div>
+                            </div>
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+						登录信息过期
+					</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <pre>{
+  "message": "cookies已过期",
+  "status": "402"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="panel-275937">
+                            <h1>/scores</h1>
+                            <h3>描述</h3>
+                            <p>
+                                查询教务系统上的个人成绩，提供按学期查找、按学年查找和查找全部三种方式
+                            </p>
+                            <h3>参数</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width='20%'>
+                                            是否必须
+                                        </th>
+                                        <th width='20%'>
+                                            参数名
+                                        </th>
+                                        <th>
+                                            参数说明
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            非必须
+                                        </td>
+                                        <td>
+                                            sjxz
+                                        </td>
+                                        <td>
+                                            时间限制(1为查询全部，2为按学年查找，3为按学期查找)，默认为1
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            非必须
+                                        </td>
+                                        <td>
+                                            xn
+                                        </td>
+                                        <td>
+                                            学年(sjxz为1时忽略此项)，默认为2016，表示2016-2017学年
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            非必须
+                                        </td>
+                                        <td>
+                                            xq
+                                        </td>
+                                        <td>
+                                            学期(sjxz为1和2时忽略此项，0为第一学期，1为第二学期)，默认为0
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3>返回值说明</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width='20%'>
+                                            字段
+                                        </th>
+                                        <th width='20%'>
+                                            类型
+                                        </th>
+                                        <th>
+                                            说明
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            status
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            状态
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            message
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            状态说明
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            yx
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            院(系)/部
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            xzbj
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            行政班级
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            xh
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            学号
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            xm
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            姓名
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            dysj
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            打印时间
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            allgrade
+                                        </td>
+                                        <td>
+                                            list
+                                        </td>
+                                        <td>
+                                            所有成绩(包含各学期名和学期成绩)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3>调用示例</h3>
+                            <code>http://api.chaiziyi.com.cn/jwgl/scores?sjxz=3&xn=2015&xq=1</code>
+                            <h3>JSON示例</h3>
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+						查询成功
+					</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <pre>{
+  "message": "学业成绩",
+  "xm": "xxx",
+  "xzbj": "xxx",
+  "yx": "xxx",
+  "dysj": "xxx",
+  "status": "200",
+  "allgrade": [
+    {
+      "grade": [
+        {
+          "xh": "1",//序号
+          "bz": null,//备注
+          "kchj": "[MARE000400]形势与政策",//课程/环节
+          "xf": "xxx",//学分
+          "cj": "xxx",//成绩
+          "lb": "通识教育课程",//类别
+          "xdxz": "初修",//修读性质
+          "xfjd": "xxx",//学分绩点
+          "hdxf": "xxx",//获得学分
+          "khfs": "考试",//考核方式
+          "jd": "xxx"//绩点
+        },
+        {
+          "xh": "2",
+          "bz": null,
+          "kchj": "[INFO006500]编译原理",
+          "xf": "xxx",
+          "cj": "xxx",
+          "lb": "专业主干课程",
+          "xdxz": "初修",
+          "xfjd": "xxx",
+          "hdxf": "xxx",
+          "khfs": "考试",
+          "jd": "xxx"
+        }
+      ],
+      "xq": "xxx"//学期
+    }
+  ],
+  "xh": "xxx"
+}</pre>
+                                </div>
+                            </div>
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+						登录信息过期
+					</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <pre>{
+  "message": "cookies已过期",
+  "status": "402"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="panel-275936">
+                            <h1>/schedule</h1>
+                            <h3>描述</h3>
+                            <p>
+                                按学期查找查询教务系统上的课程表信息
+                            </p>
+                            <h3>参数</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width='20%'>
+                                            是否必须
+                                        </th>
+                                        <th width='20%'>
+                                            参数名
+                                        </th>
+                                        <th>
+                                            参数说明
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            非必须
+                                        </td>
+                                        <td>
+                                            xn
+                                        </td>
+                                        <td>
+                                            学年，默认为2016，表示2016-2017学年
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            非必须
+                                        </td>
+                                        <td>
+                                            xq
+                                        </td>
+                                        <td>
+                                            学期(0为第一学期，1为第二学期)，默认为0
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3>返回值说明</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width='20%'>
+                                            字段
+                                        </th>
+                                        <th width='20%'>
+                                            类型
+                                        </th>
+                                        <th>
+                                            说明
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            status
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            状态
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            message
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            状态说明
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            kcb
+                                        </td>
+                                        <td>
+                                            list
+                                        </td>
+                                        <td>
+                                            课程表
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            kcm
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            课程名
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            sksj
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            上课时间(上课周数和小课节数)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            skdd
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            上课地点(可能为null)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            rq
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            日期(格式为kxx，第一个数字表示星期几，第二个数字表示第几节大课，每天分为5节大课，上午两节下午两节晚上一节，如k21就表示星期二的第一节大课)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            ls
+                                        </td>
+                                        <td>
+                                            string
+                                        </td>
+                                        <td>
+                                            老师名字
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3>调用示例</h3>
+                            <code>http://api.chaiziyi.com.cn/jwgl/schedule?xn=2015&xq=1</code>
+                            <h3>JSON示例</h3>
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+						查询成功
+					</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <pre>{
+  "status": "200",
+  "message": "我的课表",
+  "kcb": [
+    {
+      "kcm": "xxx",
+      "sksj": "1-20[1-2]",
+      "skdd": "xxx",
+      "rq": "k21",
+      "ls": "xxx"
+    },
+    {
+      "kcm": "xxx",
+      "sksj": "1-20[3-4]",
+      "skdd": null,
+      "rq": "k22",
+      "ls": "xxx"
+    }
+  ]
+}</pre>
+                                </div>
+                            </div>
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+						登录信息过期
+					</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <pre>{
+  "message": "cookies已过期",
+  "status": "402"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
