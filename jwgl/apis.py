@@ -127,7 +127,7 @@ def getSchedule(cookies,xn=2016,xq=0):
     w = requests.Session()
     p = w.post(url5, headers=header,cookies=cookies)
     userCode = p.json()['userCode']
-    tempstr = ('xn='+str(xn)+'&xq='+str(xq)+'&xh=201300002445').encode('UTF-8')
+    tempstr = ('xn='+str(xn)+'&xq='+str(xq)+'&xh='+str(userCode)).encode('UTF-8')
     #print (bytes(tempstr))
     w.headers.update({'Referer': url10})
     f=w.get(url9,params={'params':base64.b64encode(tempstr)},cookies=cookies)
